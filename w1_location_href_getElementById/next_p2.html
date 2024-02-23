@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="images/img3.jpg" alt="" onmouseover=" src='images/img4.jpg'"
+    onmouseleave="src='images/img3.jpg'" onclick="showMesg()"><br>
+    <button onclick="showMesg('b1 is used')">b1</button><br>
+    <button onclick="showMesg('b2 is used')">b2</button><br>
+    <button onclick="gotoPage()">Home</button><br>
+    <button id="b3">b3</button>
+
+
+    <script>
+        var myWin;
+        var b3=document.getElementById('b3');
+        b3=document.addEventListener("click",openMoodle);
+        function showMesg(s){
+            alert(s);
+            console.log("Ok");
+        }
+        function gotoPage(){
+            location.href='w1_01.html';
+        }
+        function openMoodle(){
+            myWin=window.open("https://moodle.mcu.edu.tw/",'name',"width=450,height=400");
+            myWin.moveTo(300,300)
+        } 
+    </script>
+</body>
+</html>

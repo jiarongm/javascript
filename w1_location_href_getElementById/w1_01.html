@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img src="images/img1.jpg" alt="" onmouseover=" src='images/img2.jpg'"
+    onmouseleave="src='images/img1.jpg'" onclick="showMesg()"><br>
+    <button onclick="showMesg('b1 is used')">b1</button><br>
+    <button onclick="showMesg('b2 is used')">b2</button><br>
+    <button onclick="gotoPage()">Next</button>
+    <script>
+        function showMesg(s){
+            alert(s);
+            console.log("Ok");
+        }
+        function gotoPage(){
+            location.href='next_p2.html';
+            
+        }
+    </script>
+</body>
+</html>
