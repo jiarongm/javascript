@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>HW1 09161141江佳蓉：滑鼠點按小圖片後，將大圖片置換成對應的小圖片。</table><br>
+    <img  id='p1'src="images/img1.jpg" alt="" width="733" height="460"><br>
+    <img onclick="changePho('1')" src="images/img1.jpg" alt="" width="180" height="150">
+    <img onclick="changePho('2')" src="images/img2.jpg" alt="" width="180" height="150">
+    <img onclick="changePho('3')" src="images/img3.jpg" alt="" width="180" height="150">
+    <img onclick="changePho('4')" src="images/img4.jpg" alt="" width="180" height="150">
+
+    <script>
+        var p1;
+        var p1=document.getElementById('p1');
+        function changePho(s){
+            if(s=='1')p1.src='images/img1.jpg';
+            if(s=='2')p1.src='images/img2.jpg';
+            if(s=='3')p1.src='images/img3.jpg';
+            if(s=='4')p1.src='images/img4.jpg';
+        }
+
+    </script>
+</body>
+</html>
