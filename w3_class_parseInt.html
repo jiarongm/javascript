@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .scene {
+            background-image: url(image3.jpg);
+            background-repeat: no-repeat;
+            width: 600px;
+            height: 440px;
+            border: medium solid #FF3;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+
+        #balloon {
+            background-image: url(balloon.png);
+            background-repeat: no-repeat;
+            width: 90px;
+            height: 90px;
+            position: absolute;
+            top: 460px;
+            left: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="scene">
+        <div id="balloon"></div>
+    </div>
+    <script>
+        setInterval("move()",100);
+        var b=document.getElementById("balloon");
+        b.style.top="460px";//要先給值 像是在宣告
+        b.style.left="50px";//要先給值 像是在宣告
+        function move(){
+            var y=parseInt(b.style.top);
+            var x=parseInt(b.style.left);
+            y=y-3;
+            x=x+Math.round(Math.random()*10-5);//四捨五入
+            b.style.top=y+"px";//要把單位寫上
+            b.style.left=x+"px";//要把單位寫上
+            console.log("y="+y);
+        }
+        
+    </script>
+</body>
+
+</html>
