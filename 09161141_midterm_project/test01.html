@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            font-family: system-ui;
+            background: #acd4eb;
+            color: white;
+            text-align: center;
+            margin-top: 10;
+            overflow: hidden;
+            /*不要溢出 不要卷軸*/
+        }
+
+        #ball {
+            position: fixed;
+            display: none;
+            top: 10%;
+            right: 50%;
+        }
+
+        #catcher {
+            position: absolute;
+            display: none;
+        }
+
+        .Btn {
+            font-size: x-large;
+            position: absolute;
+            top: 80%;
+            right:48%;
+        }
+
+        #Tmanual {
+            font-size: 1.05em;
+            color: rgb(36, 7, 60);
+            font-style: status-bar;
+            font-weight: bold;
+            line-height: 1.6;
+        }
+
+        #demo {
+            border-radius: 50px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Ball Game/09161141江佳蓉</title>
+</head>
+
+<body>
+    <p id="Tmanual">單點下方托盤，滑鼠控制托盤移動來接球。<br>有左右邊界，球碰到會反彈，觸底則失敗。</p>
+    <video id="demo" controls autoplay width='460' src="Demo.mp4"></video>
+    <div class="Btn">
+        <button id="playBtn" autofocus>PLAY</button>
+        <button id="replayBtn" autofocus style="display:none;">RePLAY</button>
+    </div>
+    <img id='ball' src="ball2.png" alt="ball" style="width:64px;height:64px;">
+    <img id='catcher' src="catcher.png" alt="catcher" style="width:124px;height:32px;">
+
+    <script>
+        var ball = document.getElementById("ball");
+        var catcher = document.getElementById("catcher");
+        var playBtn = document.getElementById("playBtn");
+        var replayBtn = document.getElementById("replayBtn");
+        var demo = document.getElementById("demo");
+        var Tmanual = document.getElementById("Tmanual");
+        var follower = -1;
+        catcher.addEventListener("mousemove", MoveCatcher);
+
+        catcher.style.top = "80%";
+        catcher.style.right = "55%";
+        var Cy = parseInt(catcher.style.top);
+        var Cx = parseInt(catcher.style.left);
+
+        catcher.onclick = function () {
+            follower *= -1;
+        }
+        playBtn.onclick = function () {
+            MoveBall();
+            ball.style.display = "block";
+            catcher.style.display = "block";
+            demo.style.display = "none";
+            Tmanual.style.display = "none";
+            this.style.display = "none";
+        }
+        replayBtn.onclick = function () {
+            By = 0;
+            Bx = 0;
+            ball.style.top = "10%";
+            ball.style.right = "50%";
+            MoveBall();
+            this.style.display="none";
+        }
+
+        function MoveCatcher(event) {
+            var rect = catcher.getBoundingClientRect();//相對於視窗的位置
+            var mouseX = event.clientX - rect.width / 2; // 讓滑鼠位於catcher的中心
+            var mouseY = event.clientY - rect.height / 2;//clientY相對於視窗的座標
+            if (follower > 0) {
+                catcher.style.top = mouseY + "px"; // 設定catcher的位置
+                catcher.style.left = mouseX + "px";
+                Cy = parseInt(catcher.style.top);
+                Cx = parseInt(catcher.style.left);
+            }
+        }
+        var moving = true, Bx, By, dx, dy;
+        var i=0;
+        function BallMoving() {
+            Bx += dx; By += dy;
+            dy += 0.98 / 10;
+            /*
+            ball.style.top=parseInt(catcher.style.top)-51+"px";
+            ball.style.left=parseInt(catcher.style.left)-32+"px";//-32 ~ +96
+            */
+            ball.style.top = By + "px";
+            ball.style.left = Bx + "px";
+            console.log("By = " + By + "parseInt(catcher.style.top)= " + parseInt(catcher.style.top));
+            console.log("Bx = " + Bx + "parseInt(catcher.style.left)= " + parseInt(catcher.style.left));
+            i+=5;
+            ball.style.rotate=i%360+"deg";
+            if (By >= window.innerHeight) { // 觸底 停止
+                alert("GameOver!!!");
+                clearInterval(interval);
+                replayBtn.style.display = "block";
+            }
+            if (Bx >= window.innerWidth - 64 || Bx < 0) {
+                dx *= -1;
+            } PlayBall();
+
+        }
+        var interval;
+        function MoveBall() {
+            /*不能用迴圈(會閃現)*/
+            var position = ball.getBoundingClientRect();
+            Bx = position.left;//初始位置
+            By = position.top;
+            dx = 0.5; dy = 1;
+            interval = setInterval(BallMoving, 20); // 每20毫秒更新一次位置
+
+        }
+        function PlayBall() {
+            // 球碰盤
+            if (By - Cy >= -61 && By - Cy <= -41 && Bx - Cx >= -32 && Bx - Cx <= 96) {
+                ball.style.top = parseInt(catcher.style.top) - 51 + "px";
+                dy *= -1;
+                console.log("Ball caught!");
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
